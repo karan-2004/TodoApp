@@ -3,6 +3,7 @@
 > #Creating a directory for the application
 
 `mkdir todoapp`
+
 `cd todoapp`
 
 > #Creating environment(make sure you have python and pip installed)
