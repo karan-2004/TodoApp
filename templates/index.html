@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#000000">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'icons/favicon96.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'output.css' %}">
+    <title>TODO</title>
+</head>
+<body class="w-screen h-screen p-5 md:flex md:justify-center">
+    <div class='border border-gray-700 rounded-md w-full h-full p-3 flex flex-col justify-between md:w-[320px]' >
+        <p class="text-center font-extrabold">TODO LIST</p>
+        <div class="h-[20%]">
+            <form class="flex flex-col bg-gray-700 text-white p-3 h-full  rounded-sm items-start justify-between" action="{% url 'index' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="op" value="add">
+                <input id='todo' class="rounded-sm p-1 w-full text-gray-800" name="todo" type="text">
+                <input type="submit" class="px-1 bg-white text-gray-700 h-[30%] rounded-sm align-middle hover:scale-110 cursor-pointer" value="Add">
+            </form>
+        </div>
+        <div class="h-[65%] overflow-auto">
+            <p class="font-semibold">YOUR TODO LIST</p>
+            {% for todo in todoList %}
+                <div class="bg-gray-700 text-white w-full mt-2 rounded-sm p-1 px-3 flex relative">
+                    
+                    {% if todo.status %}
+                        <img width="10%" src="{% static 'icons/greentick.png' %}" alt="">
+                    {% endif %}
+                        
+                    <p>{{todo.todo}}</p>
+                    
+                    {% if not todo.status %}
+                        <div>
+                            <form action="{% url 'index' %}" method="Post" class="absolute left-[80%]">
+                                {% csrf_token %}
+                                <input type="hidden" name="op" value="update">
+                                <input type="hidden" name="id"  value={{todo.id}}>
+                                <button type="submit"><img width="80%" class="bg-white" src="{% static 'icons/tick24.png' %}" alt=""></button>
+                            </form>
+                        </div>
+                    {% endif %}
+                        
+                    <div>
+                        <form action="{% url 'index' %}" method="Post" class="absolute left-[90%]">
+                            {% csrf_token %}
+                            <input type="hidden" name="op" value="delete">
+                            <input type="hidden" name="id"  value={{todo.id}}>
+                            <button type="submit"><img width="80%" class="bg-white" src="{% static 'icons/delete.png' %}" alt=""></button>
+                        </form>
+                    </div>
+
+                </div>
+            {% endfor %}
+                
+        </div>
+    </div>
+</body>
+</html>
