@@ -2,7 +2,9 @@
 ## Run the following commands in your terminal(lines starting with # are annotations not for execution)
 > #Creating a directory for the application
 
-`mkdir genzbodhi`
+`mkdir todoapp`
+`cd todoapp`
+
 > #Creating environment(make sure you have python and pip installed)
 
 `pip install venv`
@@ -21,11 +23,11 @@
 
 >#Cloning the repository
 
-`git clone https://github.com/MANIKANDAN28072004/genzbodhi genzbodhi -b master`
+`git clone https://github.com/karan-2004/TodoApp todoproject -b main`
 
 >#changing the directory
 
-`cd genzbodhi`
+`cd todoproject`
 
 >#Installing dependencies
 
